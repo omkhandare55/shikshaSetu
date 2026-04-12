@@ -8,5 +8,8 @@ python-multipart==0.0.9
 Pillow>=10.4.0,<12
 numpy==1.26.4
 easyocr==1.7.1
+# Database Driver
+psycopg[binary]==3.2.4
+
 # Optional fallback when `tesseract` binary exists on the server (e.g. apt install tesseract-ocr)
 pytesseract==0.3.10
