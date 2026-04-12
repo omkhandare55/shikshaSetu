@@ -1,0 +1,6 @@
+@echo off
+echo Starting Next.js frontend...
+start cmd.exe /k "npm run dev"
+
+echo Starting FastAPI backend...
+start cmd.exe /k "venv\Scripts\python server_main.py"
