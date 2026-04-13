@@ -1,8 +1,11 @@
 [variables]
-    NIXPACKS_PYTHON_VERSION = "3.12"
+    NIXPACKS_PYTHON_VERSION = "3.11"
 
 [phases.setup]
-    nixPkgs = ["python3", "python3Packages.pip", "nodejs_20", "pkg-config", "libGL", "glib", "tesseract"]
+    nixPkgs = ["python311", "python311Packages.pip", "pkg-config", "libGL", "glib", "tesseract"]
+
+[phases.install]
+    cmds = ["python3 -m pip install -r requirements.txt"]
 
 [start]
     cmd = "python3 server_main.py"
