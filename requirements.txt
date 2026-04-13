@@ -10,6 +10,8 @@ numpy==1.26.4
 easyocr==1.7.1
 # Database Driver
 psycopg-binary
+# Auth - required by server_auth.py
+passlib[bcrypt]
 
 # Optional fallback when `tesseract` binary exists on the server (e.g. apt install tesseract-ocr)
 pytesseract==0.3.10
