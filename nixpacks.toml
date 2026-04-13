@@ -2,7 +2,7 @@
     NIXPACKS_PYTHON_VERSION = "3.12"
 
 [phases.setup]
-    nixPkgs = ["python312Full", "pkg-config", "libGL", "glib"]
+    nixPkgs = ["python312", "python312Packages.pip", "nodejs", "pkg-config", "libGL", "glib", "tesseract", "tesseract-ocr-hin-data"]
 
 [start]
     cmd = "python3 server_main.py"
