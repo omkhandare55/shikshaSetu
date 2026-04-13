@@ -287,5 +287,6 @@ def daily_challenge(class_level: str = "5"):
 # ── Dev server ────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    port = int(os.environ.get("API_PORT", "8000"))
-    uvicorn.run("server_main:app", host="0.0.0.0", port=port, reload=True)
+    # Prioritize 'PORT' (Railway/Render standard) then 'API_PORT', default to 8000
+    port = int(os.environ.get("PORT") or os.environ.get("API_PORT") or "8000")
+    uvicorn.run("server_main:app", host="0.0.0.0", port=port, reload=False)

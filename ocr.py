@@ -39,14 +39,21 @@ def get_llm():
     if _llm is None:
         try:
             from llama_cpp import Llama
-            log.info("Loading Llama model into memory (this might take a minute)...")
+            # Prioritize environment variable, then hardcoded local path
+            model_path = os.environ.get("LLM_MODEL_PATH") or r"C:\Users\Hardik\OneDrive\Desktop\shikasetu\models\Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf"
+            
+            if not os.path.exists(model_path):
+                log.warning(f"Llama model file not found at: {model_path}. local_generate_answer will be disabled.")
+                return None
+                
+            log.info(f"Loading Llama model from {model_path} into memory...")
             _llm = Llama(
-                model_path=r"C:\Users\Hardik\OneDrive\Desktop\shikasetu\models\Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+                model_path=model_path,
                 n_ctx=2048,  
                 verbose=False 
             )
         except ImportError:
-            log.error("llama-cpp-python not installed. Please run: pip install llama-cpp-python")
+            log.warning("llama-cpp-python not installed. local_generate_answer will be disabled.")
             return None
         except Exception as e:
             log.error(f"Failed to load Llama model: {e}")
