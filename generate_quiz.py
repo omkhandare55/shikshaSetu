@@ -222,8 +222,10 @@ for cls_level in range(1, 11):
     }
 
 # Write to file
+# Use a relative path so it works on any machine/server
+output_path = os.path.join(os.path.dirname(__file__), "services", "quiz_data.py")
 file_content = "quiz_data = " + json.dumps(quiz_data, indent=4) + "\n"
-with open("c:/Users/Hardik/OneDrive/Desktop/shikshasetu/shikshaSetu/services/quiz_data.py", "w", encoding="utf-8") as f:
+with open(output_path, "w", encoding="utf-8") as f:
     f.write(file_content)
 
 print(f"Generated {sum(len(sub) for c in quiz_data.values() for sub in c.values())} questions across 10 classes.")

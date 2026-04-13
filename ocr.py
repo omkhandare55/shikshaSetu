@@ -24,8 +24,12 @@ def get_easyocr_reader():
     if _easyocr_reader is None:
         try:
             import easyocr
-            log.info("Loading EasyOCR models into memory (this only happens once)...")
-            _easyocr_reader = easyocr.Reader(["en", "hi"], gpu=False)
+            # Use a specific writable directory for models on cloud platforms
+            model_dir = os.environ.get("EASYOCR_MODEL_STORAGE") or os.path.join(os.getcwd(), "model_cache")
+            os.makedirs(model_dir, exist_ok=True)
+            
+            log.info(f"Loading EasyOCR models (cache: {model_dir})...")
+            _easyocr_reader = easyocr.Reader(["en", "hi"], gpu=False, model_storage_directory=model_dir)
         except ImportError:
             log.warning("EasyOCR is not installed. Skipping to Tesseract.")
             return None

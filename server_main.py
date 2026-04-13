@@ -166,10 +166,11 @@ async def ocr_endpoint(image: UploadFile = File(...)):
     try:
         text = extract_text(data)
     except Exception as e:
+        log.error(f"OCR Exception: {e}")
         raise HTTPException(
             status_code=500,
-            detail=f"OCR processing error: {e!s}",
-        ) from e
+            detail=f"The OCR engine encountered an error. This usually happens on low-memory servers (like Free tiers). Try a smaller image or upgrade RAM. Error: {e!s}",
+        )
 
     if not text.strip() and not ocr_engines_available():
         raise HTTPException(
