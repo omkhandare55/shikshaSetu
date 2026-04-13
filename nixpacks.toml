@@ -2,7 +2,7 @@
     NIXPACKS_PYTHON_VERSION = "3.12"
 
 [phases.setup]
-    nixPkgs = ["python312", "pkg-config", "libGL", "glib", "gcc", "libX11"]
+    nixPkgs = ["python312", "pkg-config", "libGL", "glib"]
 
 [phases.install]
     dependsOn = ["setup"]
