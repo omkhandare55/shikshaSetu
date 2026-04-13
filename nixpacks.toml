@@ -1,3 +1,12 @@
-# Render (and other Nixpacks builders) may default to the newest Python; 3.14 breaks Pillow/EasyOCR wheels.
 [variables]
-NIXPACKS_PYTHON_VERSION = "3.12"
+    NIXPACKS_PYTHON_VERSION = "3.12"
+
+[phases.setup]
+    nixPkgs = ["python312", "pkg-config", "libGL", "libglib"]
+
+[phases.install]
+    dependsOn = ["setup"]
+    cmds = ["pip install -r requirements.txt"]
+
+[start]
+    cmd = "python3 server_main.py"
