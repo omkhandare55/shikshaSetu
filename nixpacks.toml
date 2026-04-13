@@ -2,11 +2,11 @@
     NIXPACKS_PYTHON_VERSION = "3.12"
 
 [phases.setup]
-    nixPkgs = ["python312", "pkg-config", "libGL", "glib"]
+    nixPkgs = ["python312", "pkg-config", "libGL", "glib", "gcc", "g++", "xorg.libX11"]
 
 [phases.install]
     dependsOn = ["setup"]
-    cmds = ["python3 -m pip install -r requirements.txt"]
+    cmds = ["python3 -m pip install --upgrade pip", "python3 -m pip install --no-cache-dir -r requirements.txt"]
 
 [start]
     cmd = "python3 server_main.py"
